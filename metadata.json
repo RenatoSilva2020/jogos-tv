@@ -1,0 +1,7 @@
+{
+  "name": "Portal de Canais Esportivos",
+  "description": "Hub e guia de canais esportivos Premiere, SporTV, ESPN, Sportynet e BandSports com links diretos, player e exportador de arquivo index.html.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

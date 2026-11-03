@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rede Esporte - Guia de Jogos na TV & Player ao Vivo</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23dc2626'><circle cx='12' cy='12' r='10'/><polygon points='10,8 16,12 10,16' fill='white'/></svg>">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: #07090e;
+      color: #f1f5f9;
+      line-height: 1.5;
+    }
+    header {
+      background: #0f1420;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #ffffff;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .brand-icon {
+      width: 30px;
+      height: 30px;
+      background: #dc2626;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: bold;
+    }
+    .nav-tabs {
+      display: flex;
+      gap: 6px;
+      background: rgba(255,255,255,0.06);
+      padding: 4px;
+      border-radius: 10px;
+    }
+    .tab-btn {
+      background: transparent;
+      border: 0;
+      color: #94a3b8;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .tab-btn.active {
+      background: #dc2626;
+      color: #fff;
+    }
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-server-top {
+      background: #dc2626;
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 6px;
+    }
+    .container {
+      max-width: 1560px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .banner {
+      background: #0f1420;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .banner-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .banner-sub {
+      font-size: 0.85rem;
+      color: #94a3b8;
+      margin-top: 4px;
+    }
+    .channels-bar {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      margin-bottom: 20px;
+      padding-bottom: 4px;
+    }
+    .channel-chip {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: #e2e8f0;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      white-space: nowrap;
+      text-decoration: none;
+    }
+    .channel-chip:hover {
+      background: rgba(220, 38, 38, 0.2);
+      border-color: #dc2626;
+    }
+    .filter-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .filter-tabs {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: #94a3b8;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .filter-btn.active {
+      background: #dc2626;
+      color: #fff;
+      border-color: #dc2626;
+    }
+    .date-btn {
+      background: transparent;
+      border: 0;
+      color: #94a3b8;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 7px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .date-btn:hover {
+      color: #fff;
+      background: rgba(255,255,255,0.08);
+    }
+    .date-btn.active {
+      background: #dc2626;
+      color: #fff;
+      box-shadow: 0 1px 4px rgba(220,38,38,0.4);
+    }
+    .search-input {
+      background: #0f1420;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 8px 14px;
+      color: #fff;
+      font-size: 0.8rem;
+      min-width: 240px;
+      outline: none;
+    }
+    .search-input:focus {
+      border-color: #dc2626;
+    }
+    .matches-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 14px;
+    }
+    .match-card {
+      background: #0f1420;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.15s ease, border-color 0.15s ease;
+    }
+    .match-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(220, 38, 38, 0.4);
+    }
+    .match-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .match-time {
+      background: rgba(0,0,0,0.5);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: #fff;
+    }
+    .match-champ {
+      font-size: 0.75rem;
+      color: #94a3b8;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 180px;
+    }
+    .match-teams {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #fff;
+      margin: 6px 0 10px;
+    }
+    .match-channels {
+      background: rgba(0,0,0,0.3);
+      padding: 8px 10px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      color: #cbd5e1;
+      margin-bottom: 12px;
+      border: 1px solid rgba(255,255,255,0.04);
+    }
+    .btn-watch {
+      background: #dc2626;
+      color: #fff;
+      border: 0;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+    }
+    .btn-watch:hover {
+      background: #b91c1c;
+    }
+    /* Video Section */
+    .video-layout {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 20px;
+    }
+    @media (max-width: 1024px) {
+      .video-layout { grid-template-columns: 1fr; }
+    }
+    .player-wrapper {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: #000;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.7);
+    }
+    .player-wrapper iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    .player-meta {
+      background: #0f1420;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .playlist {
+      background: #0f1420;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 16px;
+      max-height: calc(100vh - 120px);
+      overflow-y: auto;
+    }
+    .channel-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid rgba(255,255,255,0.04);
+      border-radius: 8px;
+      margin-bottom: 8px;
+      cursor: pointer;
+    }
+    .channel-item.active, .channel-item:hover {
+      background: rgba(220, 38, 38, 0.2);
+      border-color: #dc2626;
+    }
+    .hide { display: none !important; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand" onclick="switchTab('guide')">
+      <div class="brand-icon">▶</div>
+      <span>REDE ESPORTE</span>
+    </div>
+
+    <div class="nav-tabs">
+      <button id="tab-btn-guide" class="tab-btn active" onclick="switchTab('guide')">Jogos do Dia</button>
+      <button id="tab-btn-video" class="tab-btn" onclick="switchTab('video')">Player & Canais</button>
+    </div>
+
+    <div class="top-actions">
+      <a id="btn-top-server" href="https://redecanais.by/player3/ch.php?canal=premiereclubes" target="_blank" rel="noopener noreferrer" class="btn-server-top">
+        Abrir no Servidor ↗
+      </a>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- VIEW 1: GUIA DE JOGOS DO DIA (PADRÃO) -->
+    <div id="view-guide">
+      <div class="banner">
+        <div>
+          <div class="banner-title">
+            <span>Guia de Jogos na TV</span>
+            <span style="font-size: 0.7rem; background: #dc2626; color: #fff; padding: 2px 8px; border-radius: 4px;">AO VIVO</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 4px;">
+            <div id="date-label" class="banner-sub" style="margin-top: 0;">Fonte 365Scores · Hoje</div>
+            <span id="status-badge" style="font-size: 0.7rem; background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); padding: 2px 8px; border-radius: 9999px; font-weight: 600;">● Grade ativa</span>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+          <div style="display: inline-flex; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); border-radius: 9px; padding: 3px; gap: 3px;">
+            <button class="date-btn" id="date-btn-yesterday" onclick="changeDate('yesterday')">Ontem</button>
+            <button class="date-btn active" id="date-btn-today" onclick="changeDate('today')">Hoje</button>
+            <button class="date-btn" id="date-btn-tomorrow" onclick="changeDate('tomorrow')">Amanhã</button>
+          </div>
+          <button onclick="checkLiveUpdates(true)" style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: #fff; padding: 7px 12px; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 5px;">
+            <span>Atualizar</span> ⟳
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick channels bar -->
+      <div class="channels-bar">
+        <span style="font-size: 0.75rem; color: #94a3b8; font-weight: bold; margin-right: 6px; align-self: center;">Sintonizar:</span>
+        <button class="channel-chip" onclick="playChannel('premiere-c')">Premiere (7 canais)</button>
+        <button class="channel-chip" onclick="playChannel('sportv-1')">SporTV (3 canais)</button>
+        <button class="channel-chip" onclick="playChannel('espn-1')">ESPN (6 canais)</button>
+        <button class="channel-chip" onclick="playChannel('sportynet-1')">Sportynet (3 canais)</button>
+        <button class="channel-chip" onclick="playChannel('bandsports')">BandSports</button>
+      </div>
+
+      <!-- Filter Bar -->
+      <div class="filter-bar">
+        <div class="filter-tabs">
+          <button class="filter-btn active" onclick="setFilter('all', this)">Todos os Jogos</button>
+          <button class="filter-btn" onclick="setFilter('available', this)">Canais do Portal</button>
+          <button class="filter-btn" onclick="setFilter('youtube', this)">No YouTube</button>
+          <button class="filter-btn" onclick="setFilter('brasileirao', this)">Brasileirão</button>
+          <button class="filter-btn" onclick="setFilter('seriea', this)">Serie A</button>
+          <button class="filter-btn" onclick="setFilter('copas', this)">Copas</button>
+        </div>
+        <input type="text" id="search-box" class="search-input" placeholder="Buscar time ou torneio..." oninput="filterList()">
+      </div>
+
+      <!-- Matches Grid -->
+      <div id="matches-container" class="matches-grid"></div>
+    </div>
+
+    <!-- VIEW 2: VIDEO PLAYER & CANAIS -->
+    <div id="view-video" class="hide">
+      <div class="video-layout">
+        <div>
+          <div class="player-wrapper">
+            <iframe id="main-player" src="https://redecanais.by/player3/ch.php?canal=premiereclubes" allowfullscreen allow="autoplay; fullscreen; encrypted-media"></iframe>
+          </div>
+          <div class="player-meta">
+            <div>
+              <div id="player-title" style="font-size: 1.3rem; font-weight: 800; color: #fff;">PREMIERE C</div>
+              <div id="player-desc" style="font-size: 0.85rem; color: #94a3b8;">Transmissão oficial via player3 redecanais</div>
+            </div>
+            <a id="btn-player-direct" href="https://redecanais.by/player3/ch.php?canal=premiereclubes" target="_blank" rel="noopener noreferrer" class="btn-watch">
+              Abrir no Servidor Oficial ↗
+            </a>
+          </div>
+        </div>
+
+          <div style="font-size: 0.95rem; font-weight: 800; color: #fff; margin-bottom: 12px;">Selecione o Canal (38)</div>
+          <div id="channels-list"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const channels = [
+      { id: "premiere-c", name: "PREMIERE C", net: "Premiere", url: "https://redecanais.by/player3/ch.php?canal=premiereclubes" },
+      { id: "premiere-2", name: "PREMIERE 2", net: "Premiere", url: "https://redecanais.by/player3/ch.php?canal=premiere2" },
+      { id: "premiere-3", name: "PREMIERE 3", net: "Premiere", url: "https://redecanais.by/player3/ch.php?canal=premiere3" },
+      { id: "premiere-4", name: "PREMIERE 4", net: "Premiere", url: "https://redecanais.by/player3/ch.php?canal=premiere4" },
+      { id: "premiere-5", name: "PREMIERE 5", net: "Premiere", url: "https://redecanais.by/player3/ch.php?canal=premiere5" },
+      { id: "premiere-6", name: "PREMIERE 6", net: "Premiere", url: "https://redecanais.by/player3/ch.php?canal=premiere6" },
+      { id: "premiere-7", name: "PREMIERE 7", net: "Premiere", url: "https://redecanais.by/player3/ch.php?canal=premiere7" },
+      { id: "sportv-1", name: "SPORTV 1", net: "SporTV", url: "https://redecanais.by/player3/ch.php?canal=sportv1" },
+      { id: "sportv-2", name: "SPORTV 2", net: "SporTV", url: "https://redecanais.by/player3/ch.php?canal=sportv2" },
+      { id: "sportv-3", name: "SPORTV 3", net: "SporTV", url: "https://redecanais.by/player3/ch.php?canal=sportv3" },
+      { id: "sportv-4", name: "SPORTV 4", net: "SporTV", url: "https://ww0.embedtv.cc/sportv4" },
+      { id: "sportynet-1", name: "SPORTYNET 1", net: "Sportynet", url: "https://redecanais.by/player3/ch.php?canal=sportynet1" },
+      { id: "sportynet-2", name: "SPORTYNET 2", net: "Sportynet", url: "https://redecanais.by/player3/ch.php?canal=sportynet2" },
+      { id: "sportynet-3", name: "SPORTYNET 3", net: "Sportynet", url: "https://redecanais.by/player3/ch.php?canal=sportynet3" },
+      { id: "espn-1", name: "ESPN 1", net: "ESPN", url: "https://redecanais.by/player3/ch.php?canal=espn" },
+      { id: "espn-2", name: "ESPN 2", net: "ESPN", url: "https://redecanais.by/player3/ch.php?canal=espn2" },
+      { id: "espn-3", name: "ESPN 3", net: "ESPN", url: "https://redecanais.by/player3/ch.php?canal=espn3" },
+      { id: "espn-4", name: "ESPN 4", net: "ESPN", url: "https://redecanais.by/player3/ch.php?canal=espn4" },
+      { id: "espn-5", name: "ESPN 5", net: "ESPN", url: "https://redecanais.by/player3/ch.php?canal=espn5" },
+      { id: "espn-6", name: "ESPN 6", net: "ESPN", url: "https://redecanais.by/player3/ch.php?canal=espn6" },
+      { id: "bandsports", name: "BANDSPORTS", net: "BandSports", url: "https://redecanais.by/player3/ch.php?canal=bandsports" },
+      { id: "record", name: "RECORD", net: "Record", url: "https://redecanais.by/player3/ch.php?canal=record" },
+      { id: "sbt", name: "SBT", net: "SBT", url: "https://redecanais.by/player3/ch.php?canal=sbt" },
+      { id: "cazetv-1", name: "CAZETV 1", net: "CazéTV", url: "https://ww0.embedtv.cc/caze1" },
+      { id: "cazetv-2", name: "CAZETV 2", net: "CazéTV", url: "https://ww0.embedtv.cc/caze2" },
+      { id: "cazetv-3", name: "CAZETV 3", net: "CazéTV", url: "https://ww0.embedtv.cc/caze3" },
+      { id: "disney-1", name: "DISNEY+ 1", net: "Disney+", url: "https://ww0.embedtv.cc/disneyplus1" },
+      { id: "disney-2", name: "DISNEY+ 2", net: "Disney+", url: "https://ww0.embedtv.cc/disneyplus2" },
+      { id: "disney-3", name: "DISNEY+ 3", net: "Disney+", url: "https://ww0.embedtv.cc/disneyplus3" },
+      { id: "max-1", name: "HBO MAX1", net: "HBO Max", url: "https://ww0.embedtv.cc/max1" },
+      { id: "max-2", name: "HBO MAX2", net: "HBO Max", url: "https://ww0.embedtv.cc/max2" },
+      { id: "max-3", name: "HBO MAX3", net: "HBO Max", url: "https://ww0.embedtv.cc/max3" },
+      { id: "paramount-1", name: "PARAMOUNT+ 1", net: "Paramount+", url: "https://ww0.embedtv.cc/paramountplus" },
+      { id: "paramount-2", name: "PARAMOUNT+ 2", net: "Paramount+", url: "https://ww0.embedtv.cc/paramountplus2" },
+      { id: "primevideo-1", name: "PRIME VIDEO 1", net: "Prime Video", url: "https://ww0.embedtv.cc/primevideo" },
+      { id: "primevideo-2", name: "PRIME VIDEO 2", net: "Prime Video", url: "https://ww0.embedtv.cc/primevideo2" },
+      { id: "primevideo-3", name: "PRIME VIDEO 3", net: "Prime Video", url: "https://ww0.embedtv.cc/primevideo3" },
+      { id: "primevideo-4", name: "PRIME VIDEO 4", net: "Prime Video", url: "https://ww0.embedtv.cc/primevideo4" }
+    ];
+
+    function getDeviceDateLabel() {
+      const now = new Date();
+      const days = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
+      const dayName = days[now.getDay()];
+      const d = String(now.getDate()).padStart(2, '0');
+      const m = String(now.getMonth() + 1).padStart(2, '0');
+      return `${dayName} – ${d}/${m}`;
+    }
+
+    const DEFAULT_DATE = "Hoje";
+    const DEFAULT_MATCHES = [
+      { time: "04:45", confrontation: "Newcastle Jets FC x Shanghai Port", championship: "Liga dos Campeões da Ásia", channels: "Disney+", matchedId: "disney-1", matchedName: "DISNEY+", available: true, homeLogo: "https://imagecache.365scores.com/image/upload/f_png,c_limit,q_auto:eco,dpr_2/Competitors/4014", awayLogo: "https://imagecache.365scores.com/image/upload/f_png,c_limit,q_auto:eco,dpr_2/Competitors/6225" },
+      { time: "07:00", confrontation: "Kashiwa Reysol x Daejeon Hana Citizen", championship: "Liga dos Campeões da Ásia", channels: "Disney+", matchedId: "disney-1", matchedName: "DISNEY+", available: true, homeLogo: "https://imagecache.365scores.com/image/upload/f_png,c_limit,q_auto:eco,dpr_2/Competitors/3932", awayLogo: "https://imagecache.365scores.com/image/upload/f_png,c_limit,q_auto:eco,dpr_2/Competitors/6557" },
+      { time: "07:00", confrontation: "Vissel Kobe x Ratchaburi FC", championship: "Liga dos Campeões da Ásia", channels: "Disney+", matchedId: "disney-1", matchedName: "DISNEY+", available: true, homeLogo: "https://imagecache.365scores.com/image/upload/f_png,c_limit,q_auto:eco,dpr_2/Competitors/4010", awayLogo: "https://imagecache.365scores.com/image/upload/f_png,c_limit,q_auto:eco,dpr_2/Competitors/6558" },
+      { time: "10:45", confrontation: "Pakhtakor x Al-Nassr", championship: "Liga dos Campeões da Ásia", channels: "ESPN 4, Disney+", matchedId: "espn-4", matchedName: "ESPN 4", available: true, homeLogo: "https://imagecache.365scores.com/image/upload/f_png,c_limit,q_auto:eco,dpr_2/Competitors/10345", awayLogo: "https://imagecache.365scores.com/image/upload/f_png,c_limit,q_auto:eco,dpr_2/Competitors/7549" },
+      { time: "14:45", confrontation: "Galatasaray x Stuttgart", championship: "Liga dos Campeões", channels: "Space, HBO Max", matchedId: "max-1", matchedName: "HBO MAX / TNT", available: true },
+      { time: "17:00", confrontation: "Shakhtar Donetsk x Sporting CP", championship: "Liga dos Campeões", channels: "TNT Sports, HBO Max", matchedId: "max-1", matchedName: "HBO MAX / TNT", available: true },
+      { time: "17:00", confrontation: "CD Anaitasuna x Alavés", championship: "Copa do Rei", channels: "Disney+", matchedId: "disney-1", matchedName: "DISNEY+", available: true },
+      { time: "17:00", confrontation: "Sheffield United x Wrexham", championship: "Premier League", channels: "ESPN, Disney+", matchedId: "espn-1", matchedName: "ESPN 1", available: true },
+      { time: "17:00", confrontation: "Villarreal x Espanyol", championship: "LaLiga", channels: "ESPN 4, Disney+", matchedId: "espn-4", matchedName: "ESPN 4", available: true },
+      { time: "17:05", confrontation: "Lille x RC Lens", championship: "Ligue 1", channels: "CazéTV, YouTube", matchedId: "cazetv-1", matchedName: "CAZÉTV", available: true },
+      { time: "19:30", confrontation: "Criciúma x Ponte Preta", championship: "Brasileirão Série B", channels: "Premiere, SporTV", matchedId: "premiere-c", matchedName: "PREMIERE", available: true },
+      { time: "20:00", confrontation: "Corinthians x Mirassol", championship: "Brasileirão", channels: "Premiere, TV Globo", matchedId: "premiere-c", matchedName: "PREMIERE", available: true },
+      { time: "21:15", confrontation: "Racing x Aldosivi", championship: "Campeonato Argentino", channels: "ESPN 4, Disney+", matchedId: "espn-4", matchedName: "ESPN 4", available: true },
+      { time: "21:30", confrontation: "Al-Shabab x Al-Ahli", championship: "Liga Saudita", channels: "BandSports, Canal GOAT", matchedId: "bandsports", matchedName: "BANDSPORTS", available: true }
+    ];
+
+    // FootyLogos team badge dictionary
+    const TEAM_SLUGS = {
+      'palmeiras': 'palmeiras',
+      'flamengo': 'flamengo',
+      'corinthians': 'corinthians',
+      'sao paulo': 'sao-paulo',
+      'santos': 'santos-fc',
+      'fluminense': 'fluminense',
+      'botafogo': 'botafogo',
+      'vasco': 'vasco-da-gama',
+      'internacional': 'sc-internacional',
+      'inter': 'sc-internacional',
+      'gremio': 'gremio',
+      'cruzeiro': 'cruzeiro',
+      'bahia': 'bahia',
+      'red bull bragantino': 'red-bull-bragantino',
+      'chapecoense': 'chapecoense',
+      'remo': 'clube-do-remo',
+      'atletico mineiro': 'atletico-mineiro',
+      'atletico mg': 'atletico-mineiro',
+      'athletico paranaense': 'athletico-paranaense',
+      'athletico pr': 'athletico-paranaense',
+      'fortaleza': 'fortaleza-ec',
+      'sport': 'sport-recife',
+      'coritiba': 'coritiba-fbc',
+      'vitoria': 'ec-vitoria',
+      'goias': 'goias-ec',
+      'juventude': 'ec-juventude',
+      'criciuma': 'criciuma-ec',
+      'cuiaba': 'cuiaba-ec',
+      'real madrid': 'real-madrid',
+      'barcelona': 'fc-barcelona',
+      'manchester city': 'manchester-city',
+      'manchester united': 'manchester-united',
+      'liverpool': 'liverpool-fc',
+      'arsenal': 'arsenal',
+      'chelsea': 'chelsea',
+      'frosinone': 'frosinone-calcio',
+      'lecce': 'us-lecce',
+      'fiorentina': 'acffiorentina',
+      'atalanta': 'atalanta-bc',
+      'everton': 'everton-fc',
+      'newcastle': 'newcastle-united',
+      'al-nassr': 'al-nassr-fc',
+      'al nassr': 'al-nassr-fc',
+      'al-kholood': 'al-kholood-club',
+      'al kholood': 'al-kholood-club',
+      'al-riyadh': 'al-riyadh-sc',
+      'al riyadh': 'al-riyadh-sc',
+      'al-qadsiah': 'al-qadsiah-fc',
+      'al qadsiah': 'al-qadsiah-fc',
+      'osasuna': 'ca-osasuna',
+      'getafe': 'getafe-cf',
+      'athletic bilbao': 'athletic-bilbao',
+      'athletic club': 'athletic-bilbao',
+      'deportivo a coruna': 'deportivo-la-coruna',
+      'racing santander': 'racing-de-santander',
+      'seville': 'sevilla-fc',
+      'sevilla': 'sevilla-fc',
+      'psg': 'paris-saint-germain',
+      'paris saint-germain': 'paris-saint-germain',
+      'bayern de munique': 'bayern-munich',
+      'bayern munich': 'bayern-munich',
+      'bayer leverkusen': 'bayer-leverkusen',
+      'wolfsburg': 'vfl-wolfsburg',
+      'freiburg': 'sc-freiburg',
+      'stuttgart': 'vfb-stuttgart',
+      'schalke 04': 'fc-schalke-04',
+      'hertha berlin': 'hertha-bsc',
+      'inter de milao': 'inter-milan',
+      'milan': 'ac-milan',
+      'juventus': 'juventus',
+      'napoli': 'ssc-napoli',
+      'roma': 'as-roma',
+      'bolonga': 'bologna-fc-1909',
+      'genoa': 'genoa-cfc',
+      'monza': 'ac-monza',
+      'parma': 'parma-calcio-1913',
+      'udinese': 'udinese-calcio',
+      'venezia': 'venezia-fc',
+      'brighton': 'brighton-hove-albion',
+      'aston villa': 'aston-villa',
+      'crystal palace': 'crystal-palace',
+      'brentford': 'brentford-fc',
+      'fulham': 'fulham-fc',
+      'bournemouth': 'afc-bournemouth',
+      'sunderland': 'sunderland-afc',
+      'valencia': 'valencia-cf',
+      'celta de vigo': 'rc-celta-de-vigo',
+      'real betis': 'real-betis',
+      'alaves': 'deportivo-alaves',
+      'levante': 'ud-levante',
+      'benfica': 'sl-benfica',
+      'lyon': 'olympique-lyonnais',
+      'rangers': 'rangers-fc',
+      'hearts': 'heart-of-midlothian',
+      'inter miami': 'inter-miami-cf',
+      'fc cincinnati': 'fc-cincinnati',
+      'atlanta united': 'atlanta-united-fc',
+      'orlando city': 'orlando-city-sc',
+      'columbus crew': 'columbus-crew',
+      'chicago fire': 'chicago-fire-fc',
+      'austin fc': 'austin-fc',
+      'seattle sounders': 'seattle-sounders-fc',
+      'portland timbers': 'portland-timbers',
+      'olimpia': 'club-olimpia',
+      'independiente santa fe': 'independiente-santa-fe'
+    };
+
+    function getTeamBadgeHtml(teamName, directLogoUrl) {
+      if (!teamName) return '';
+      const initials = (teamName.slice(0, 3)).toUpperCase();
+
+      if (directLogoUrl) {
+        return '<span style="display:inline-flex;align-items:center;justify-content:center;position:relative;width:26px;height:26px;flex-shrink:0;"><img src="' + directLogoUrl + '" alt="' + teamName + '" style="width:26px;height:26px;object-fit:contain;" onerror="this.style.display=\'none\';if(this.nextElementSibling)this.nextElementSibling.style.display=\'inline-flex\';"><span style="display:none;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:#1e293b;border:1px solid rgba(255,255,255,0.1);color:#fff;font-size:9px;font-weight:900;">' + initials + '</span></span>';
+      }
+
+      const norm = teamName.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
+      let slug = TEAM_SLUGS[norm];
+      if (!slug) {
+        for (const k in TEAM_SLUGS) {
+          if (norm.includes(k) || k.includes(norm)) {
+            slug = TEAM_SLUGS[k];
+            break;
+          }
+        }
+      }
+      if (!slug) {
+        slug = norm.split(' ').join('-');
+      }
+
+      let template = 'https://bolarolando.org/escudos/{slug}.webp';
+      if (template.includes('corinthians.webp')) {
+        template = template.replace('corinthians.webp', '{slug}.webp');
+      }
+
+      const bolarolandoMap = {
+        'sao-paulo': 'spfc', 'sao paulo': 'spfc', 'spfc': 'spfc',
+        'atletico-mineiro': 'mg', 'atletico mineiro': 'mg', 'atletico-mg': 'mg',
+        'athletico-paranaense': 'pr', 'athletico-pr': 'pr',
+        'santos-fc': 'santos', 'vasco-da-gama': 'vasco',
+        'aa-ponte-preta': 'ponte', 'ponte-preta': 'ponte', 'ponte preta': 'ponte',
+        'red-bull-bragantino': 'bragantino', 'real-madrid': 'madrid',
+        'manchester-city': 'city', 'paris-saint-germain': 'psg', 'psg': 'psg',
+        'fc-barcelona': 'barcelona', 'al-nassr': 'nassr', 'al-kholood': 'kholood'
+      };
+      const effectiveSlug = bolarolandoMap[slug] || bolarolandoMap[norm] || slug.replace(/-fc$/, '').replace(/-sc$/, '').replace(/-ec$/, '');
+      
+      let url = template;
+      if (url.includes('{slug}')) {
+        url = url.split('{slug}').join(effectiveSlug);
+      } else if (url.includes('{name}')) {
+        url = url.split('{name}').join(effectiveSlug);
+      } else {
+        const base = url.endsWith('/') ? url.slice(0, -1) : url;
+        url = base + '/' + effectiveSlug + '.webp';
+      }
+
+      return '<span style="display:inline-flex;align-items:center;justify-content:center;position:relative;width:26px;height:26px;flex-shrink:0;"><img src="' + url + '" alt="' + teamName + '" style="width:26px;height:26px;object-fit:contain;" onerror="this.style.display=\'none\';if(this.nextElementSibling)this.nextElementSibling.style.display=\'inline-flex\';"><span style="display:none;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:#1e293b;border:1px solid rgba(255,255,255,0.1);color:#fff;font-size:9px;font-weight:900;">' + initials + '</span></span>';
+    }
+
+    function extractYouTubeInfo(channelsStr, confrontation) {
+      if (!channelsStr) return null;
+      const raw = channelsStr.trim();
+      const lower = raw.toLowerCase();
+
+      // 1. Explicit handle in text (e.g. "Youtube.com/@canalgoatbr" or "@CazeTV")
+      const handleMatch = raw.match(/@([A-Za-z0-9_.-]+)/);
+      if (handleMatch) {
+        const handle = handleMatch[1];
+        let displayName = '@' + handle;
+        const hLow = handle.toLowerCase();
+        if (hLow.includes('cazetv') || hLow.includes('caze')) displayName = 'CazéTV';
+        else if (hLow.includes('canalgoat') || hLow.includes('goat')) displayName = 'Canal Goat';
+        else if (hLow.includes('jovempanesportes') || hLow.includes('jovempan')) displayName = 'Jovem Pan Esportes';
+        else if (hLow.includes('canalgolbrasil') || hLow.includes('golbrasil')) displayName = 'Canal Gol Brasil';
+        else if (hLow.includes('ulissescostatv') || hLow.includes('ulisses')) displayName = 'Ulisses Costa TV';
+        else if (hLow.includes('sportynetbrasil') || hLow.includes('sportynet')) displayName = 'SportyNet Brasil';
+        else if (hLow.includes('paulistao')) displayName = 'Paulistão';
+        else if (hLow.includes('desimpedidos')) displayName = 'Desimpedidos';
+
+        return {
+          url: 'https://www.youtube.com/@' + handle,
+          name: displayName,
+          isExactChannel: true
+        };
+      }
+
+      // 2. Known YouTube broadcast channels mentioned by brand name
+      if (lower.includes('cazé') || lower.includes('caze')) {
+        return { url: 'https://www.youtube.com/@CazeTV', name: 'CazéTV', isExactChannel: true };
+      }
+      if (lower.includes('canal goat') || (lower.includes('goat') && lower.includes('youtube'))) {
+        return { url: 'https://www.youtube.com/@canalgoatbr', name: 'Canal Goat', isExactChannel: true };
+      }
+      if (lower.includes('jovem pan')) {
+        return { url: 'https://www.youtube.com/@jovempanesportes', name: 'Jovem Pan Esportes', isExactChannel: true };
+      }
+      if (lower.includes('desimpedidos')) {
+        return { url: 'https://www.youtube.com/@desimpedidos', name: 'Desimpedidos', isExactChannel: true };
+      }
+      if (lower.includes('ulisses costa')) {
+        return { url: 'https://www.youtube.com/@UlissesCostaTV', name: 'Ulisses Costa TV', isExactChannel: true };
+      }
+      if (lower.includes('gol brasil')) {
+        return { url: 'https://www.youtube.com/@canalgolbrasil', name: 'Canal Gol Brasil', isExactChannel: true };
+      }
+      if (lower.includes('sportynet') && lower.includes('youtube')) {
+        return { url: 'https://www.youtube.com/@SportyNetBrasil', name: 'SportyNet Brasil', isExactChannel: true };
+      }
+      if (lower.includes('paulistao') || lower.includes('paulistão')) {
+        return { url: 'https://www.youtube.com/@paulistao', name: 'Paulistão', isExactChannel: true };
+      }
+
+      // 3. Generic YouTube mention
+      if (lower.includes('youtube') || lower.includes('you tube')) {
+        const query = confrontation ? (confrontation + ' ao vivo') : 'futebol ao vivo';
+        return {
+          url: 'https://www.youtube.com/results?search_query=' + encodeURIComponent(query),
+          name: 'YouTube',
+          isExactChannel: false
+        };
+      }
+
+      return null;
+    }
+
+    let allMatches = [...DEFAULT_MATCHES];
+    let currentFilter = 'all';
+
+    function switchTab(tab) {
+      if (tab === 'guide') {
+        document.getElementById('view-guide').classList.remove('hide');
+        document.getElementById('view-video').classList.add('hide');
+        document.getElementById('tab-btn-guide').classList.add('active');
+        document.getElementById('tab-btn-video').classList.remove('active');
+      } else {
+        document.getElementById('view-guide').classList.add('hide');
+        document.getElementById('view-video').classList.remove('hide');
+        document.getElementById('tab-btn-guide').classList.remove('active');
+        document.getElementById('tab-btn-video').classList.add('active');
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function playChannel(id) {
+      const ch = channels.find(c => c.id === id) || channels[0];
+      const player = document.getElementById('main-player');
+      player.src = ch.url;
+      document.getElementById('player-title').textContent = ch.name;
+      document.getElementById('player-desc').textContent = ch.net + ' · Transmissão oficial via player3 redecanais';
+      document.getElementById('btn-player-direct').href = ch.url;
+      const btnTop = document.getElementById('btn-top-server');
+      if (btnTop) btnTop.href = ch.url;
+
+      document.querySelectorAll('.channel-item').forEach(el => el.classList.remove('active'));
+      const activeEl = document.getElementById('item-' + ch.id);
+      if (activeEl) activeEl.classList.add('active');
+
+      switchTab('video');
+    }
+
+    // Render channels in sidebar
+    const chList = document.getElementById('channels-list');
+    channels.forEach((ch, idx) => {
+      const item = document.createElement('div');
+      item.id = 'item-' + ch.id;
+      item.className = 'channel-item' + (idx === 0 ? ' active' : '');
+      item.innerHTML = '<div><strong style="font-size: 0.85rem; color:#fff;">' + ch.name + '</strong><div style="font-size:0.75rem; color:#94a3b8;">' + ch.net + '</div></div><span style="font-size:0.75rem; color:#dc2626; font-weight:bold;">Assistir ▶</span>';
+      item.onclick = () => playChannel(ch.id);
+      chList.appendChild(item);
+    });
+
+    function parseMatchesHtml(html) {
+      const dateMatch = html.match(/<h2><span[^>]*>(.*?)<\/span><\/h2>/i);
+      const dateLabel = dateMatch ? dateMatch[1].replace(/&#8211;/g, '–').trim() : DEFAULT_DATE;
+      document.getElementById('date-label').textContent = 'Fonte Mantos do Futebol · ' + dateLabel;
+
+      const regex = /<h3><strong>(.*?)<\/strong><\/h3>[\s\S]*?<p><span[^>]*><strong>Canais:\s*(.*?)<\/strong><\/span><\/p>/gi;
+      let m;
+      const list = [];
+      while ((m = regex.exec(html)) !== null) {
+        const rawTitle = m[1].replace(/&#8211;/g, '–').replace(/&amp;/g, '&').trim();
+        const rawChannels = m[2].replace(/&#8211;/g, '–').replace(/&amp;/g, '&').trim();
+        const parts = rawTitle.split('–').map(s => s.trim());
+        const time = parts[0] || '';
+        const confrontation = parts[1] || '';
+        const championship = parts.slice(2).join(' – ') || '';
+
+        let matchedId = null;
+        let matchedName = null;
+        const chLower = rawChannels.toLowerCase();
+        if (chLower.includes('premiere')) { matchedId = 'premiere-c'; matchedName = 'PREMIERE'; }
+        else if (chLower.includes('sportv 2')) { matchedId = 'sportv-2'; matchedName = 'SPORTV 2'; }
+        else if (chLower.includes('sportv 3')) { matchedId = 'sportv-3'; matchedName = 'SPORTV 3'; }
+        else if (chLower.includes('sportv')) { matchedId = 'sportv-1'; matchedName = 'SPORTV 1'; }
+        else if (chLower.includes('espn 2')) { matchedId = 'espn-2'; matchedName = 'ESPN 2'; }
+        else if (chLower.includes('espn 3')) { matchedId = 'espn-3'; matchedName = 'ESPN 3'; }
+        else if (chLower.includes('espn 4')) { matchedId = 'espn-4'; matchedName = 'ESPN 4'; }
+        else if (chLower.includes('espn')) { matchedId = 'espn-1'; matchedName = 'ESPN 1'; }
+        else if (chLower.includes('sportynet')) { matchedId = 'sportynet-1'; matchedName = 'SPORTYNET'; }
+        else if (chLower.includes('bandsports')) { matchedId = 'bandsports'; matchedName = 'BANDSPORTS'; }
+
+        list.push({
+          time,
+          confrontation,
+          championship,
+          channels: rawChannels,
+          matchedId,
+          matchedName,
+          available: Boolean(matchedId)
+        });
+      }
+      return list;
+    }
+
+    function renderMatches() {
+      const container = document.getElementById('matches-container');
+      const q = (document.getElementById('search-box').value || '').toLowerCase().trim();
+
+      const filtered = allMatches.filter(m => {
+        if (currentFilter === 'available' && !m.available) return false;
+        if (currentFilter === 'youtube' && !extractYouTubeInfo(m.channels, m.confrontation)) return false;
+        if (currentFilter === 'brasileirao' && !m.championship.toLowerCase().includes('brasileir')) return false;
+        if (currentFilter === 'seriea' && !m.championship.toLowerCase().includes('serie a')) return false;
+        if (currentFilter === 'copas' && !m.championship.toLowerCase().includes('copa') && !m.championship.toLowerCase().includes('libertadores')) return false;
+        if (q && !m.confrontation.toLowerCase().includes(q) && !m.championship.toLowerCase().includes(q) && !m.channels.toLowerCase().includes(q)) return false;
+        return true;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #94a3b8;">Nenhum jogo encontrado com esse filtro.</div>';
+        return;
+      }
+
+      container.innerHTML = '';
+      filtered.forEach(m => {
+        const parts = m.confrontation.split(' x ').map(s => s.trim());
+        const homeTeam = parts[0] || m.confrontation;
+        const awayTeam = parts[1] || '';
+        const homeBadge = getTeamBadgeHtml(homeTeam, m.homeLogo);
+        const awayBadge = awayTeam ? getTeamBadgeHtml(awayTeam, m.awayLogo) : '';
+        const yt = extractYouTubeInfo(m.channels, m.confrontation);
+
+        let actionButtons = '';
+        if (m.available) {
+          actionButtons += `<button class="btn-watch" onclick="playChannel('${m.matchedId}')">Assistir no ${m.matchedName} ▶</button>`;
+        }
+        if (yt) {
+          actionButtons += `<a href="${yt.url}" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;background:#dc2626;color:#fff;padding:6px 12px;border-radius:8px;font-size:0.75rem;font-weight:700;text-decoration:none;border:1px solid rgba(255,255,255,0.25);box-shadow:0 1px 3px rgba(0,0,0,0.3);transition:background 0.2s;">
+            <svg style="width:13px;height:13px;fill:currentColor;flex-shrink:0;" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            <span>Assistir no ${yt.name} ↗</span>
+          </a>`;
+        }
+        if (!m.available && !yt) {
+          actionButtons += `<span style="font-size:0.75rem; color:#64748b;">Streaming / Externa</span>`;
+        }
+
+        const card = document.createElement('div');
+        card.className = 'match-card';
+        card.innerHTML = `
+          <div>
+            <div class="match-header">
+              <span class="match-time">${m.time}</span>
+              <span class="match-champ">${m.championship}</span>
+            </div>
+            
+            <div style="margin: 10px 0; padding: 8px 10px; background: rgba(0,0,0,0.4); border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; gap: 8px;">
+              <div style="display: flex; align-items: center; gap: 8px; flex: 1; min-width: 0;">
+                ${homeBadge}
+                <span style="font-weight: 800; font-size: 0.85rem; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${homeTeam}</span>
+              </div>
+              <span style="background: rgba(220,38,38,0.2); color: #f87171; border: 1px solid rgba(220,38,38,0.4); border-radius: 6px; font-size: 10px; font-weight: 900; padding: 2px 6px; flex-shrink: 0;">VS</span>
+              <div style="display: flex; align-items: center; justify-content: flex-end; gap: 8px; flex: 1; min-width: 0; text-align: right;">
+                <span style="font-weight: 800; font-size: 0.85rem; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${awayTeam || 'A definir'}</span>
+                ${awayBadge}
+              </div>
+            </div>
+
+            <div class="match-channels"><strong>Canais:</strong> ${m.channels}</div>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-top: 10px;">
+            ${actionButtons}
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function setFilter(type, btn) {
+      currentFilter = type;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderMatches();
+    }
+
+    function filterList() {
+      renderMatches();
+    }
+
+    // Helper to get realistic broadcast channel recommendations by competition / teams
+    function getFallbackChannelsForCompetition(compName, homeTeam, awayTeam) {
+      const lower = ((compName || '') + ' ' + (homeTeam || '') + ' ' + (awayTeam || '')).toLowerCase();
+      if (lower.includes('ásia') || lower.includes('asia') || lower.includes('afc') || lower.includes('nassr') || lower.includes('hilal')) return 'ESPN 4, Disney+';
+      if (lower.includes('liga dos campeões') || lower.includes('champions league') || lower.includes('champions')) return 'TNT Sports, Space, HBO Max, SBT';
+      if (lower.includes('europa league') || lower.includes('liga europa')) return 'CazéTV, Disney+, ESPN';
+      if (lower.includes('conference league')) return 'CazéTV, Disney+';
+      if (lower.includes('premier league') || lower.includes('inglês') || lower.includes('ingles')) return 'ESPN, Disney+';
+      if (lower.includes('laliga') || lower.includes('la liga') || lower.includes('espanhol')) return 'ESPN, Disney+';
+      if (lower.includes('serie a') || lower.includes('italiano') || lower.includes('calcio')) return 'ESPN 4, Disney+';
+      if (lower.includes('bundesliga') || lower.includes('alemão') || lower.includes('alemao')) return 'CazéTV, SporTV, RedeTV';
+      if (lower.includes('ligue 1') || lower.includes('francês') || lower.includes('frances')) return 'CazéTV, YouTube';
+      if (lower.includes('libertadores')) return 'Paramount+, Disney+, ESPN, TV Globo';
+      if (lower.includes('sul-americana') || lower.includes('sudamericana')) return 'Paramount+, ESPN, Disney+';
+      if (lower.includes('brasileirão') || lower.includes('brasileiro') || lower.includes('serie a') || lower.includes('série a')) return 'Premiere, SporTV, TV Globo';
+      if (lower.includes('série b') || lower.includes('serie b')) return 'Premiere, SporTV, Canal GOAT, Band';
+      if (lower.includes('copa do brasil')) return 'Premiere, SporTV, Prime Video, TV Globo';
+      if (lower.includes('paulistão') || lower.includes('paulista')) return 'CazéTV, Record, HBO Max, TNT';
+      if (lower.includes('carioca')) return 'Band, Canal GOAT, CazéTV';
+      if (lower.includes('copa do rei')) return 'ESPN 4, Disney+';
+      if (lower.includes('copa da inglaterra') || lower.includes('fa cup')) return 'ESPN, Disney+';
+      if (lower.includes('saudita') || lower.includes('saudi') || lower.includes('roshn')) return 'BandSports, Canal GOAT, YouTube';
+      return 'Disney+, ESPN 4, SporTV';
+    }
+
+    // Channel matcher helper for client-side / static hosting (GitHub Pages)
+    function matchChannelFromText(text) {
+      if (!text) return null;
+      const lower = text.toLowerCase();
+      if (lower.includes('premiere 2')) return { id: 'premiere-2', name: 'PREMIERE 2' };
+      if (lower.includes('premiere 3')) return { id: 'premiere-3', name: 'PREMIERE 3' };
+      if (lower.includes('premiere 4')) return { id: 'premiere-4', name: 'PREMIERE 4' };
+      if (lower.includes('premiere 5')) return { id: 'premiere-5', name: 'PREMIERE 5' };
+      if (lower.includes('premiere 6')) return { id: 'premiere-6', name: 'PREMIERE 6' };
+      if (lower.includes('premiere 7')) return { id: 'premiere-7', name: 'PREMIERE 7' };
+      if (lower.includes('premiere')) return { id: 'premiere-c', name: 'PREMIERE' };
+      if (lower.includes('sportv 4')) return { id: 'sportv-4', name: 'SPORTV 4' };
+      if (lower.includes('sportv 2')) return { id: 'sportv-2', name: 'SPORTV 2' };
+      if (lower.includes('sportv 3')) return { id: 'sportv-3', name: 'SPORTV 3' };
+      if (lower.includes('sportv')) return { id: 'sportv-1', name: 'SPORTV 1' };
+      if (lower.includes('espn 2')) return { id: 'espn-2', name: 'ESPN 2' };
+      if (lower.includes('espn 3')) return { id: 'espn-3', name: 'ESPN 3' };
+      if (lower.includes('espn 4')) return { id: 'espn-4', name: 'ESPN 4' };
+      if (lower.includes('espn 5')) return { id: 'espn-5', name: 'ESPN 5' };
+      if (lower.includes('espn 6')) return { id: 'espn-6', name: 'ESPN 6' };
+      if (lower.includes('espn')) return { id: 'espn-1', name: 'ESPN 1' };
+      if (lower.includes('sportynet 2')) return { id: 'sportynet-2', name: 'SPORTYNET 2' };
+      if (lower.includes('sportynet 3')) return { id: 'sportynet-3', name: 'SPORTYNET 3' };
+      if (lower.includes('sportynet')) return { id: 'sportynet-1', name: 'SPORTYNET 1' };
+      if (lower.includes('bandsports')) return { id: 'bandsports', name: 'BANDSPORTS' };
+      if (lower.includes('max') || lower.includes('hbo') || lower.includes('tnt') || lower.includes('space')) return { id: 'max-1', name: 'HBO MAX / TNT' };
+      if (lower.includes('disney') || lower.includes('star+')) return { id: 'disney-1', name: 'DISNEY+' };
+      if (lower.includes('caze') || lower.includes('cazé')) return { id: 'cazetv-1', name: 'CAZÉTV' };
+      if (lower.includes('paramount')) return { id: 'paramount-1', name: 'PARAMOUNT+' };
+      if (lower.includes('prime video') || lower.includes('primevideo') || lower.includes('amazon prime')) return { id: 'primevideo-1', name: 'PRIME VIDEO' };
+      if (lower.includes('record')) return { id: 'record', name: 'RECORD' };
+      if (lower.includes('sbt')) return { id: 'sbt', name: 'SBT' };
+      if (lower.includes('globo') || lower.includes('tv globo')) return { id: 'premiere-c', name: 'PREMIERE / GLOBO' };
+      return null;
+    }
+
+    let currentDateMode = 'today';
+    const clientTvNetworkCache = new Map();
+
+    // Interactive date switcher for Ontem, Hoje e Amanhã (works on server & static GitHub Pages)
+    async function changeDate(mode) {
+      currentDateMode = mode;
+      document.querySelectorAll('.date-btn').forEach(b => b.classList.remove('active'));
+      const activeBtn = document.getElementById('date-btn-' + mode);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      const statusBadge = document.getElementById('status-badge');
+      const dateLabelEl = document.getElementById('date-label');
+      if (statusBadge) statusBadge.textContent = 'Carregando jogos...';
+
+      // Compute date label & DD/MM/YYYY
+      const now = new Date();
+      let targetDate = new Date();
+      if (mode === 'yesterday') {
+        targetDate = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+      } else if (mode === 'tomorrow') {
+        targetDate = new Date(now.getTime() + 24 * 60 * 60 * 1000);
+      }
+      const days = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
+      const dayName = days[targetDate.getDay()];
+      const d = String(targetDate.getDate()).padStart(2, '0');
+      const m = String(targetDate.getMonth() + 1).padStart(2, '0');
+      const y = targetDate.getFullYear();
+      const dateStr = d + '/' + m + '/' + y;
+      const fallbackDateLabel = dayName + ' – ' + d + '/' + m;
+      if (dateLabelEl) dateLabelEl.textContent = 'Fonte 365Scores · ' + fallbackDateLabel;
+
+      try {
+        // 1. Try local full-stack server if running
+        try {
+          const res = await fetch('/api/jogos-hoje?date=' + mode + '&_t=' + Date.now());
+          if (res.ok) {
+            const data = await res.json();
+            if (data.matches && data.matches.length > 0) {
+              if (dateLabelEl) dateLabelEl.textContent = 'Fonte 365Scores · ' + (data.dateLabel || fallbackDateLabel);
+              allMatches = data.matches.map(m => ({
+                id: m.gameId || m.id,
+                time: m.time,
+                confrontation: m.confrontation,
+                championship: m.championship,
+                channels: m.channelsRaw,
+                homeLogo: m.homeLogo || null,
+                awayLogo: m.awayLogo || null,
+                matchedId: m.matchedChannel ? m.matchedChannel.id : null,
+                matchedName: m.matchedChannel ? m.matchedChannel.name : null,
+                available: m.isAvailableInApp
+              }));
+              renderMatches();
+              if (statusBadge) statusBadge.textContent = '● ' + allMatches.length + ' jogos carregados';
+              return;
+            }
+          }
+        } catch (e) {
+          // Ignore and proceed to direct 365Scores fetch
+        }
+
+        // 2. Direct 365Scores API (CORS friendly, works natively on GitHub Pages)
+        const scoresUrl = 'https://webws.365scores.com/web/games/allscores/?appTypeId=5&langId=31&timezoneName=America/Sao_Paulo&userCountryId=21&sports=1&startDate=' + encodeURIComponent(dateStr) + '&endDate=' + encodeURIComponent(dateStr);
+        const scoresRes = await fetch(scoresUrl);
+        if (scoresRes.ok) {
+          const data = await scoresRes.json();
+          const competitorsMap = new Map((data.competitors || []).map(c => [c.id, c]));
+          const competitionsMap = new Map((data.competitions || []).map(c => [c.id, c]));
+          const tvGames = (data.games || []).filter(g => g.hasTVNetworks);
+          const rawGames = tvGames.length > 0 ? tvGames : (data.games || []);
+
+          if (rawGames.length > 0) {
+            allMatches = rawGames.map(g => {
+              const home = competitorsMap.get(g.homeCompetitor ? g.homeCompetitor.id : null) || {};
+              const away = competitorsMap.get(g.awayCompetitor ? g.awayCompetitor.id : null) || {};
+              const comp = competitionsMap.get(g.competitionId) || {};
+              let timeStr = 'A definir';
+              if (g.startTime) {
+                try {
+                  const dt = new Date(g.startTime);
+                  timeStr = dt.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', timeZone: 'America/Sao_Paulo' });
+                } catch (e) {
+                  timeStr = g.startTime.slice(11, 16);
+                }
+              }
+              const conf = (home.name || 'Mandante') + ' x ' + (away.name || 'Visitante');
+              const compName = comp.name || g.competitionDisplayName || 'Futebol Internacional';
+
+              // Channel from cache or realistic competition broadcast
+              let channelsText = clientTvNetworkCache.get(g.id);
+              if (!channelsText) {
+                channelsText = getFallbackChannelsForCompetition(compName, home.name, away.name);
+              }
+
+              const chMatch = matchChannelFromText(channelsText);
+              return {
+                id: g.id,
+                time: timeStr,
+                confrontation: conf,
+                championship: compName,
+                channels: channelsText,
+                homeLogo: home.id ? 'https://imagecache.365scores.com/image/upload/f_png,c_limit,q_auto:eco,dpr_2/Competitors/' + home.id : null,
+                awayLogo: away.id ? 'https://imagecache.365scores.com/image/upload/f_png,c_limit,q_auto:eco,dpr_2/Competitors/' + away.id : null,
+                matchedId: chMatch ? chMatch.id : null,
+                matchedName: chMatch ? chMatch.name : null,
+                available: Boolean(chMatch)
+              };
+            });
+
+            // Fast initial render with badges & fallback channels
+            renderMatches();
+            if (statusBadge) statusBadge.textContent = '● ' + allMatches.length + ' jogos carregados via 365Scores';
+
+            // Background fetch exact TV networks for all games that have TV networks
+            const gamesToFetch = rawGames.filter(g => g.hasTVNetworks && !clientTvNetworkCache.has(g.id)).slice(0, 35);
+            if (gamesToFetch.length > 0) {
+              Promise.allSettled(gamesToFetch.map(async g => {
+                try {
+                  const detailUrl = 'https://webws.365scores.com/web/game/?gameId=' + g.id + '&langId=31&appTypeId=5&userCountryId=21&timezoneName=America/Sao_Paulo';
+                  const controller = new AbortController();
+                  const tid = setTimeout(() => controller.abort(), 3000);
+                  const detailRes = await fetch(detailUrl, { signal: controller.signal });
+                  clearTimeout(tid);
+                  if (detailRes.ok) {
+                    const jd = await detailRes.json();
+                    const nets = (jd.game?.tvNetworks || []).map(n => n.name).filter(Boolean);
+                    if (nets.length > 0) {
+                      const netStr = nets.join(', ');
+                      clientTvNetworkCache.set(g.id, netStr);
+                      const m = allMatches.find(item => item.id === g.id);
+                      if (m) {
+                        m.channels = netStr;
+                        const matched = matchChannelFromText(netStr);
+                        if (matched) {
+                          m.matchedId = matched.id;
+                          m.matchedName = matched.name;
+                          m.available = true;
+                        }
+                      }
+                    }
+                  }
+                } catch (e) {
+                  // Fallback channel already assigned
+                }
+              })).then(() => {
+                renderMatches();
+              });
+            }
+            return;
+          }
+        }
+      } catch (err) {
+        console.warn('Erro ao atualizar data:', err);
+      }
+
+      // If fetch fails or runs offline, ensure current matches stay rendered
+      renderMatches();
+      if (statusBadge) statusBadge.textContent = '● Grade ativa (' + allMatches.length + ' jogos)';
+    }
+
+    async function checkLiveUpdates(isManual = false) {
+      const statusBadge = document.getElementById('status-badge');
+      if (isManual && statusBadge) statusBadge.textContent = 'Verificando atualizações...';
+      await changeDate(currentDateMode);
+    }
+
+    // INITIALIZE: Render immediately from DEFAULT_MATCHES with zero delay!
+    const initDate = getDeviceDateLabel() || DEFAULT_DATE;
+    const initialDateLabelEl = document.getElementById('date-label');
+    if (initialDateLabelEl) initialDateLabelEl.textContent = 'Fonte 365Scores · ' + initDate;
+    renderMatches();
+
+    // Then perform non-blocking background refresh
+    setTimeout(() => checkLiveUpdates(false), 800);
+  </script>
+</body>
+</html>

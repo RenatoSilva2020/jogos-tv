@@ -1,0 +1,203 @@
+{
+  "dateLabel": "Sexta – 30/10",
+  "matches": [
+    {
+      "time": "10h45",
+      "confrontation": "Abha x Al-Ittihad",
+      "championship": "Liga Saudita",
+      "channels": "Youtube.com/@canalgoatbr e Sportv 3",
+      "matchedId": "sportv-3",
+      "matchedName": "SPORTV 3",
+      "available": true
+    },
+    {
+      "time": "11h50",
+      "confrontation": "Al-Diriyah x Neom",
+      "championship": "Liga Saudita",
+      "channels": "Youtube.com/@canalgoatbr",
+      "matchedId": null,
+      "matchedName": null,
+      "available": false
+    },
+    {
+      "time": "14h00",
+      "confrontation": "Konyaspor x Galatasaray",
+      "championship": "Campeonato Turco",
+      "channels": "ESPN 4 e Disney+",
+      "matchedId": "espn-4",
+      "matchedName": "ESPN 4",
+      "available": true
+    },
+    {
+      "time": "14h30",
+      "confrontation": "Arminia Bielefeld x Eintracht Brausnchweig",
+      "championship": "2.Bundesliga",
+      "channels": "Youtube.com/@canalgoatbr e OneFootball (PPV)",
+      "matchedId": null,
+      "matchedName": null,
+      "available": false
+    },
+    {
+      "time": "14h30",
+      "confrontation": "Energie Cottbus x Bochum",
+      "championship": "2.Bundesliga",
+      "channels": "Youtube.com/@jovempanesportes e OneFootball (PPV)",
+      "matchedId": null,
+      "matchedName": null,
+      "available": false
+    },
+    {
+      "time": "15h00",
+      "confrontation": "Al-Shabab x Al-Ahli",
+      "championship": "Liga Saudita",
+      "channels": "Youtube.com/@canalgoatbr",
+      "matchedId": null,
+      "matchedName": null,
+      "available": false
+    },
+    {
+      "time": "15h00",
+      "confrontation": "Le Havre x PSG",
+      "championship": "Ligue 1",
+      "channels": "Youtube.com/@CazeTV e Xsports",
+      "matchedId": null,
+      "matchedName": null,
+      "available": false
+    },
+    {
+      "time": "15h00",
+      "confrontation": "Nice x Rennes",
+      "championship": "Ligue 1",
+      "channels": "Youtube.com/@CazeTV",
+      "matchedId": null,
+      "matchedName": null,
+      "available": false
+    },
+    {
+      "time": "15h00",
+      "confrontation": "Bodo/Glimt x Viking",
+      "championship": "Campeoanto Norueguês",
+      "channels": "Youtube.com/@canalgolbrasil",
+      "matchedId": null,
+      "matchedName": null,
+      "available": false
+    },
+    {
+      "time": "15h00",
+      "confrontation": "Santos x Santo André",
+      "championship": "Paulistão Sub-20 (QF-volta)",
+      "channels": "Youtube.com/@UlissesCostaTV",
+      "matchedId": null,
+      "matchedName": null,
+      "available": false
+    },
+    {
+      "time": "15h00",
+      "confrontation": "Red Bull Bragantino x Capivariano",
+      "championship": "Paulistão Sub-20 (QF-volta)",
+      "channels": "Youtube.com/@UlissesCostaTV",
+      "matchedId": null,
+      "matchedName": null,
+      "available": false
+    },
+    {
+      "time": "16h30",
+      "confrontation": "Elversberg x Mainz 05",
+      "championship": "Bundesliga",
+      "channels": "Youtube.com/@canalgoatbr, Sportv 3 e OneFootball (PPV)",
+      "matchedId": "sportv-3",
+      "matchedName": "SPORTV 3",
+      "available": true
+    },
+    {
+      "time": "16h30",
+      "confrontation": "Santa Cruz x Atlético-MG",
+      "championship": "Copa do Brasil Sub-20 (QF-ida)",
+      "channels": "Sportv",
+      "matchedId": "sportv-1",
+      "matchedName": "SPORTV 1",
+      "available": true
+    },
+    {
+      "time": "16h30",
+      "confrontation": "Palma x El Ejido",
+      "championship": "Liga Espanhola Futsal",
+      "channels": "Youtube.com/@canalgolbrasil",
+      "matchedId": null,
+      "matchedName": null,
+      "available": false
+    },
+    {
+      "time": "17h00",
+      "confrontation": "Sheffield United x Wrexham",
+      "championship": "Premier League",
+      "channels": "ESPN e Disney+",
+      "matchedId": "espn-1",
+      "matchedName": "ESPN 1",
+      "available": true
+    },
+    {
+      "time": "17h00",
+      "confrontation": "Villarreal x Espanyol",
+      "championship": "LaLiga",
+      "channels": "Youtube.com/@SportyNetBrasil e SportyNet",
+      "matchedId": "sportynet-1",
+      "matchedName": "SPORTYNET 1",
+      "available": true
+    },
+    {
+      "time": "17h05",
+      "confrontation": "Lille x RC Lens",
+      "championship": "Ligue 1",
+      "channels": "Youtube.com/@CazeTV",
+      "matchedId": null,
+      "matchedName": null,
+      "available": false
+    },
+    {
+      "time": "17h15",
+      "confrontation": "Casa Pia x Sporting",
+      "championship": "Liga Portugal",
+      "channels": "ESPN 4 e Disney+",
+      "matchedId": "espn-4",
+      "matchedName": "ESPN 4",
+      "available": true
+    },
+    {
+      "time": "19h30",
+      "confrontation": "Criciúma x Ponte Preta",
+      "championship": "Brasileirão Série B",
+      "channels": "Disney+",
+      "matchedId": null,
+      "matchedName": null,
+      "available": false
+    },
+    {
+      "time": "20h00",
+      "confrontation": "Corinthians x Mirassol",
+      "championship": "Brasileirão",
+      "channels": "Sportv e Premiere",
+      "matchedId": "premiere-c",
+      "matchedName": "PREMIERE",
+      "available": true
+    },
+    {
+      "time": "21h15",
+      "confrontation": "Racing x Aldosivi",
+      "championship": "Campeonato Argentino",
+      "channels": "Disney+",
+      "matchedId": null,
+      "matchedName": null,
+      "available": false
+    },
+    {
+      "time": "22h00",
+      "confrontation": "Atlético San Luis x Atlas",
+      "championship": "Liga MX",
+      "channels": "Disney+",
+      "matchedId": null,
+      "matchedName": null,
+      "available": false
+    }
+  ]
+}
